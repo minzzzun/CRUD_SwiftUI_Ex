@@ -32,17 +32,11 @@ struct ContentView: View {
         }
         .edgesIgnoringSafeArea(.all)
         
-            
-        
-        
-        
-        
-        
-        
+
         
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}
