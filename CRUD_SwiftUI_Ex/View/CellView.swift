@@ -16,7 +16,7 @@ struct CellView : View {
             showDetialView = true
         }
         .sheet(isPresented: $showDetialView) {
-            DetailView()
+            DetailView(name: "민준", part: "iOS", ageString: "25")
         }
         
     }
