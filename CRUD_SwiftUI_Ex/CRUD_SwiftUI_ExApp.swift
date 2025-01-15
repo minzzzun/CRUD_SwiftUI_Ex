@@ -12,6 +12,7 @@ struct CRUD_SwiftUI_ExApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(.light)
         }
     }
 }
