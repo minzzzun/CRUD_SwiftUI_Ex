@@ -14,7 +14,7 @@ struct ContentView: View {
                 NavigationView {
                     List{
                         ForEach(viewModel.users){ user in
-                            CellView(user: user)
+                            CellView(user: user, viewModel: viewModel)
                         }
                     }
                     .listStyle(PlainListStyle())

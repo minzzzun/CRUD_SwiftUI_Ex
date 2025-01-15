@@ -8,9 +8,13 @@ struct DetailView : View {
     
     //MARK: property
     @Environment(\.dismiss) var dismiss
+    let viewModel: UserViewModel
+    @State var id : String
     @State var name : String
     @State var part : String
     @State var ageString : String
+
+
     @State private var showingDeleteAlert: Bool = false
     
     //MARK: UI
@@ -68,8 +72,12 @@ struct DetailView : View {
             .alert("삭제 확인", isPresented: $showingDeleteAlert){
                 Button("취소", role: .cancel){}
                 Button("삭제", role: .destructive){
-                    print("사용자 삭제")
-                    dismiss()
+                    viewModel.deleteUsers(id: id) { success in
+                        if success {
+                            dismiss()
+                        }
+                    }
+                    
                 }
             } message: {
                 Text("정말 삭제하시겠습니까")

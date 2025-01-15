@@ -5,9 +5,10 @@ import SwiftUI
 
 struct CellView : View {
     
+
     @State private var showDetialView: Bool = false
     let user: UserModel
-    
+    let viewModel : UserViewModel
     
     
     var body: some View {
@@ -19,7 +20,7 @@ struct CellView : View {
             showDetialView = true
         }
         .sheet(isPresented: $showDetialView) {
-            DetailView(name: user.name, part: user.part, ageString: String(user.age))
+            DetailView(viewModel: viewModel , id: user.id, name: user.name, part: user.part, ageString: String(user.age))
         }
         
     }

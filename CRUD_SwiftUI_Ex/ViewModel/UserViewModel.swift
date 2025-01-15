@@ -15,7 +15,7 @@ final class UserViewModel : ObservableObject {
         fetchUsers()
     }
     
-    
+    //MARK: - GET
     func fetchUsers(){
         print(#fileID,#function,#line, "fetch")
         AF.request(baseURL)
@@ -33,5 +33,30 @@ final class UserViewModel : ObservableObject {
                 
             }
     }
+    
+    
+    //MARK: - DELETE
+    func deleteUsers(id: String, completion: @escaping (Bool) -> Void){
+        let deleteURL = "\(baseURL)/\(id)"
+        
+        AF.request(deleteURL, method: .delete)
+            .validate()
+            .response { [weak self] response in
+                switch response.result {
+                case .success:
+                    DispatchQueue.main.async {
+                        self?.fetchUsers()
+                        completion(true)
+                    }
+    
+                case .failure(let error):
+                    print("Delete Error : \(error.localizedDescription)")
+                    completion(false)
+                }
+            }
+        
+        
+    }
+    
     
 }
