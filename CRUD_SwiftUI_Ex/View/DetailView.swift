@@ -11,6 +11,7 @@ struct DetailView : View {
     @State var name : String
     @State var part : String
     @State var ageString : String
+    @State private var showingDeleteAlert: Bool = false
     
     //MARK: UI
     var body: some View {
@@ -56,19 +57,31 @@ struct DetailView : View {
             .navigationBarItems(trailing:
             Button(action: {
                 print("삭제 버튼 클릭")
-                dismiss()
+                showingDeleteAlert = true
+            
             }) {
                 Text("삭제")
                     .foregroundColor(Color.red)
                     .fontWeight(.bold)
                 }
             )
+            .alert("삭제 확인", isPresented: $showingDeleteAlert){
+                Button("취소", role: .cancel){}
+                Button("삭제", role: .destructive){
+                    print("사용자 삭제")
+                    dismiss()
+                }
+            } message: {
+                Text("정말 삭제하시겠습니까")
+            }
+            
+            
         } // nav
     }
 }
 
 
 
-#Preview {
-    DetailView(name: "민준", part: "iOS", ageString: "25")
-}
+//#Preview {
+//    DetailView(name: "민준", part: "iOS", ageString: "25")
+//}
