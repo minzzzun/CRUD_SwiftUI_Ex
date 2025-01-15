@@ -22,7 +22,7 @@ struct ContentView: View {
                                         label:{
                                              Text("추가하기")
                                                 .fontWeight(.bold)
-                                                .foregroundColor(Color.init(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+                                                .foregroundColor(Color.init(#colorLiteral(red: 1, green: 0.5921568627, blue: 0.1019607843, alpha: 1)))
                                          }
                           )
                         )
@@ -32,17 +32,11 @@ struct ContentView: View {
         }
         .edgesIgnoringSafeArea(.all)
         
-            
-        
-        
-        
-        
-        
-        
+
         
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}
