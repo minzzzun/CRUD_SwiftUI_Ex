@@ -2,6 +2,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = UserViewModel()
+    
+    
     var body: some View {
     
         ZStack{
@@ -10,7 +13,7 @@ struct ContentView: View {
             VStack{
                 NavigationView {
                     List{
-                        ForEach(1...10,id: \.self){_ in
+                        ForEach(viewModel.users){ user in
                             CellView()
                         }
                     }
