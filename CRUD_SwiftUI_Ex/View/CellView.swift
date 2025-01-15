@@ -6,22 +6,26 @@ import SwiftUI
 struct CellView : View {
     
     @State private var showDetialView: Bool = false
+    let user: UserModel
+    
+    
     
     var body: some View {
         HStack(spacing: 15){
-            Text("[iOS]")
-            Text("김민준")
+            Text("[\(user.part)]")
+            Text("\(user.name)")
         }
         .onTapGesture {
             showDetialView = true
         }
         .sheet(isPresented: $showDetialView) {
-            DetailView(name: "민준", part: "iOS", ageString: "25")
+            DetailView(name: user.name, part: user.part, ageString: String(user.age))
         }
         
     }
 }
 
-#Preview {
-    CellView()
-}
+//
+//#Preview {
+//    CellView()
+//}
