@@ -20,7 +20,7 @@ struct CellView : View {
             showDetialView = true
         }
         .sheet(isPresented: $showDetialView) {
-            DetailView(viewModel: viewModel , id: user.id, name: user.name, part: user.part, ageString: String(user.age))
+            DetailView(viewModel: viewModel , id: user.id)
         }
         
     }
