@@ -9,7 +9,7 @@ struct UserDetailView : View {
     let viewModel: UserViewModel
     let user: UserModel
     @State private var showingDeleteAlert: Bool = false
-    
+    @State private var showEditView: Bool = false
     
     //MARK: - UI
     var body: some View {
@@ -39,18 +39,22 @@ struct UserDetailView : View {
             
         } //v
         .navigationTitle("상세보기")
-        
+        //MARK: 수정
         .navigationBarItems(leading:
                                 Button(action: {
             print("수정 버튼 클릭")
-            dismiss()
+            showEditView = true
         }) {
             Text("수정")
                 .foregroundColor(Color.blue)
                 .fontWeight(.bold)
         }
         )
+        .sheet(isPresented: $showEditView ){
+            EditView(viewModel: viewModel, user: user, parentDismiss: dismiss)
+        }
         
+        //MARK: 삭제
         .navigationBarItems(trailing:
                                 Button(action: {
             print("삭제 버튼 클릭")
