@@ -59,4 +59,33 @@ final class UserViewModel : ObservableObject {
     }
     
     
+    //MARK: - POST
+    func addUser(name: String, part: String, age: Int, completion: @escaping (Bool) -> Void ) {
+        let parameters : [String: Any] = [
+            "name": name,
+            "part": part,
+            "age": age
+        ]
+        
+        AF.request(baseURL,
+                   method: .post,
+                   parameters: parameters,
+                   encoding: JSONEncoding.default)
+        .validate()
+        .responseDecodable(of: UserModel.self ) { [weak self] (response: AFDataResponse<UserModel>) in
+            switch response.result {
+                        case .success(_):
+                            DispatchQueue.main.async {
+                                self?.fetchUsers()
+                                completion(true)
+                            }
+                        case .failure(let error):
+                            print("Error adding user: \(error.localizedDescription)")
+                            completion(false)
+                        }        }
+        
+        
+    }
+    
+    
 }

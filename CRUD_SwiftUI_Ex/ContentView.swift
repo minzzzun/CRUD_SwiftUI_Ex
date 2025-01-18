@@ -21,7 +21,7 @@ struct ContentView: View {
                     .navigationTitle("Title")
                     .navigationBarItems(
                             trailing: NavigationLink(destination:
-                                    AddView(),
+                                        AddView(viewModel: viewModel),
                                         label:{
                                              Text("추가하기")
                                                 .fontWeight(.bold)
