@@ -88,4 +88,35 @@ final class UserViewModel : ObservableObject {
     }
     
     
+    
+    
+    //MARK: - PATCH
+    func updateUser(id: String, name: String, part: String, age: Int, completion: @escaping (Bool) -> Void) {
+        let parameters: [String: Any] = [
+            "name": name,
+            "part": part,
+            "age": age
+        ]
+        
+        let updateURL = "\(baseURL)/\(id)"
+        
+        AF.request(updateURL,
+                  method: .patch,
+                  parameters: parameters,
+                  encoding: JSONEncoding.default)
+        .validate()
+        .responseDecodable(of: UserModel.self) { [weak self] (response: AFDataResponse<UserModel>) in
+            switch response.result {
+            case .success(_):
+                DispatchQueue.main.async {
+                    self?.fetchUsers()
+                    completion(true)
+                }
+            case .failure(let error):
+                print("Error updating user: \(error.localizedDescription)")
+                completion(false)
+            }
+        }
+    }
+    
 }
